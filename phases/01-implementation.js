@@ -62,16 +62,30 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
     let currentPair = this.data[ind]
     while(currentPair && currentPair.key !== key){
       currentPair=currentPair.next
-    } 
+    }
     if(currentPair){
       return currentPair.value
-    }   
+    }
     return undefined
   }
 
 
   resize() {
     // Your code here
+    let old = this.data
+
+   this.capacity *= 2
+
+   let newData = new Array(this.capacity).fill(null)
+   this.data = newData
+    this.count = 0
+    for (let i = 0; i < old.length; i++) {
+        let current = old[i]
+        while(current) {
+          this.insert(current.key, current.value)
+          current = current.next
+        }
+    }
   }
 
 
