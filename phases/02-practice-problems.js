@@ -5,7 +5,16 @@ function anagrams(str1, str2) {
 
 function commonElements(arr1, arr2) {
   // Your code here
-}
+  let res = []
+  const mySet = new Set(arr1)
+
+  for (let num of arr2) {
+    if (mySet.has(num)) {
+      res.push(num)
+    }
+  }
+  return res;
+};
 
 
 function duplicate(arr) {
