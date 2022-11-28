@@ -34,6 +34,7 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
   insert(key, value) {
     // Your code here
+    if(this.count/this.data.length>0.7) this.resize()
     let idx = this.hashMod(key)
 
     let currentPair = this.data[idx]
@@ -91,6 +92,24 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
   delete(key) {
     // Your code here
+    let ind = this.hashMod(key)
+    let currentPair = this.data[ind]
+    let prev;
+    while(currentPair && currentPair.key!==key){
+      prev = currentPair
+      currentPair=currentPair.next
+    }
+    if(currentPair){
+      if(prev){
+      
+        prev.next = currentPair.next
+    }else{
+      this.data[ind]=currentPair.next
+    }
+    this.count--;
+    }
+    
+    if (!currentPair) return "Key not found"
   }
 }
 
