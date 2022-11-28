@@ -10,7 +10,10 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
   constructor(numBuckets = 8) {
     // Initialize your buckets here
-    // Your code here
+    this.count = 0
+    this.capacity = numBuckets
+    this.data = new Array(this.capacity).fill(null)
+
   }
 
   hash(key) {
@@ -31,6 +34,25 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
   insert(key, value) {
     // Your code here
+    let idx = this.hashMod(key)
+
+    let currentPair = this.data[idx]
+    // console.log(this.data[idx])
+
+    while(currentPair && currentPair.key !== key) {
+      currentPair = currentPair.next
+    }
+    if (currentPair) {
+      currentPair.value = value
+      return this;
+    }
+    const newPair = new KeyValuePair(key, value)
+
+    if (this.data[idx]) {
+      newPair.next = this.data[idx]
+    }
+    this.data[idx] = newPair
+    this.count++
   }
 
 
