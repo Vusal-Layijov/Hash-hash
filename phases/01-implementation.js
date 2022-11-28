@@ -58,6 +58,15 @@ class HashTable { // get O(1), set O(1), deleteKey O(1)
 
   read(key) {
     // Your code here
+    let ind = this.hashMod(key);
+    let currentPair = this.data[ind]
+    while(currentPair && currentPair.key !== key){
+      currentPair=currentPair.next
+    } 
+    if(currentPair){
+      return currentPair.value
+    }   
+    return undefined
   }
 
 
